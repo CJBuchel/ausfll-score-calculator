@@ -42,4 +42,5 @@ pub struct Mission<'a> {
 pub trait Questions {
   fn get() -> Vec<Score<'static>>;
   fn validate(answers: Vec<ScoreAnswer>) -> Vec<ScoreError>;
+  fn score(answers: Vec<ScoreAnswer>) -> i32;
 }
