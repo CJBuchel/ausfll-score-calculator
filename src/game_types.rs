@@ -1,3 +1,7 @@
+use std::vec;
+
+use crate::{functions::s_answer, games::super_powered_2022::SuperPowered};
+
 #[derive(Clone)]
 pub struct ScoreAnswer {
   pub id: String,
@@ -23,9 +27,9 @@ pub enum QuestionInput<'a> {
 pub struct Score<'a> {
   pub id: &'a str,
   pub label: &'a str,
-  pub labelShort: &'a str,
-  pub questionInput: QuestionInput<'a>,
-  pub defaultValue: DefaultValue<'a>,
+  pub label_short: &'a str,
+  pub question_input: QuestionInput<'a>,
+  pub default_value: DefaultValue<'a>,
 }
 
 pub struct ScoreError {
@@ -36,11 +40,28 @@ pub struct ScoreError {
 pub struct Mission<'a> {
   pub prefix: &'a str,
   pub title: &'a str,
-  pub image: &'a str,
+  pub image: Option<&'a str>,
+}
+
+pub trait Missions {
+  fn get_missions(&self) -> Vec<Mission<'static>>;
 }
 
 pub trait Questions {
-  fn get() -> Vec<Score<'static>>;
-  fn validate(answers: Vec<ScoreAnswer>) -> Vec<ScoreError>;
-  fn score(answers: Vec<ScoreAnswer>) -> i32;
+  fn get_questions(&self) -> Vec<Score<'static>>;
+}
+
+pub trait Game {
+  fn get_name(&self) -> &'static str;
+  fn get_program(&self) -> &'static str;
+  fn questions(&self) -> Vec<Score<'static>>;
+  fn missions(&self) -> Vec<Mission<'static>>;
+
+  fn answer(&self, res: Vec<ScoreAnswer>, q: &str) -> String {
+    s_answer(res, q)
+  }
+
+  // main score/validations
+  fn validate(&self, answers: Vec<ScoreAnswer>) -> Vec<ScoreError>;
+  fn score(&self, answers: Vec<ScoreAnswer>) -> i32;
 }
