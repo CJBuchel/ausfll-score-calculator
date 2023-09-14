@@ -3,7 +3,7 @@ use std::ffi::OsString;
 use std::path::Path;
 use std::fs;
 
-use schema_utils::schemas::{ScoreAnswer, DefaultValue, QuestionInput, Score, ScoreError, Mission, MissionPicture, get_missions_20232024, Game, Games, get_questions_20232024, get_games};
+use schema_utils::schemas::{ScoreAnswer, DefaultValue, QuestionInput, Score, ScoreError, Mission, MissionPicture, Game, Games, get_games};
 use schemars::JsonSchema;
 
 #[derive(JsonSchema, Clone)]
