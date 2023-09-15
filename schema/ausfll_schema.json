@@ -5,7 +5,6 @@
   "required": [
     "default_value",
     "game",
-    "games",
     "mission",
     "mission_picture",
     "question_input",
@@ -19,9 +18,6 @@
     },
     "game": {
       "$ref": "#/definitions/Game"
-    },
-    "games": {
-      "$ref": "#/definitions/Games"
     },
     "mission": {
       "$ref": "#/definitions/Mission"
@@ -78,8 +74,7 @@
         "missions",
         "name",
         "program",
-        "questions",
-        "season"
+        "questions"
       ],
       "properties": {
         "missions": {
@@ -99,22 +94,6 @@
           "items": {
             "$ref": "#/definitions/Score"
           }
-        },
-        "season": {
-          "type": "integer",
-          "format": "uint32",
-          "minimum": 0.0
-        }
-      }
-    },
-    "Games": {
-      "type": "object",
-      "required": [
-        "game_2023"
-      ],
-      "properties": {
-        "game_2023": {
-          "$ref": "#/definitions/Game"
         }
       }
     },

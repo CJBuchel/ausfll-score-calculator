@@ -7,9 +7,10 @@ use std::io;
 use std::io::ErrorKind;
 
 mod schema_generator;
-mod code_generator;
-use code_generator::generate_code;
 use schema_generator::generate_schema;
+
+mod generate_wasm;
+use generate_wasm::generate_wasm;
 
 pub fn get_project_root() -> io::Result<PathBuf> {
   let path = env::current_dir()?;
@@ -33,8 +34,10 @@ fn main() -> anyhow::Result<()> {
   let schema_dir = get_project_root().unwrap();
   let schema_dir = schema_dir.join("../schema");
   fs::create_dir_all(schema_dir.clone()).unwrap();
-  generate_schema(&schema_dir.into_os_string());
-  generate_code();
+  generate_schema(&schema_dir.clone().into_os_string());
+
+  // generate wasm
+  generate_wasm(&schema_dir.clone().into_os_string());
 
   Ok(())
 }

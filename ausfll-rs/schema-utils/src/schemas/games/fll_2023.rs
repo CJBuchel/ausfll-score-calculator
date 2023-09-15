@@ -1,0 +1,540 @@
+use crate::schemas::{Score, QuestionInput, DefaultValue, AusFLLGame, ScoreAnswer, ScoreError};
+use crate::{schemas::Mission, firebase_links::MISSION_PICS_20232024};
+
+pub struct Masterpiece;
+
+impl AusFLLGame for Masterpiece {
+  fn get_questions(&self) -> Vec<Score> {
+    return vec![
+      Score {
+        id: "m00a".to_string(),
+        label: "All team equipment fits in one launch area and under 12 in. (305 mm)?".to_string(),
+        label_short: "Inspection?".to_string(),
+        question_input: QuestionInput::Categorical { 
+          options: vec![
+            "No".to_string(),
+            "Yes".to_string(),
+          ],
+        },
+    
+        default_value: DefaultValue::Text("No".to_string()),
+      },
+  
+      Score {
+        id: "m01a".to_string(),
+        label: "If the 3D cinema's small red beam is completely to the right of the black frame".to_string(),
+        label_short: "Beam right?".to_string(),
+        question_input: QuestionInput::Categorical { 
+          options: vec![
+            "No".to_string(),
+            "Yes".to_string(),
+          ],
+        },
+    
+        default_value: DefaultValue::Text("No".to_string()),
+      },
+  
+      Score {
+        id: "m02a".to_string(),
+        label: "If your theater's red flag is down and the active scene colour is:".to_string(),
+        label_short: "Flag down + colour?".to_string(),
+        question_input: QuestionInput::Categorical { 
+          options: vec![
+            "No".to_string(),
+            "Blue".to_string(),
+            "Pink".to_string(),
+            "Orange".to_string(),
+          ],
+        },
+    
+        default_value: DefaultValue::Text("No".to_string()),
+      },
+  
+      Score {
+        id: "m02b".to_string(),
+        label: "Do both teams' active scenes match?".to_string(),
+        label_short: "Teams match?".to_string(),
+        question_input: QuestionInput::Categorical { 
+          options: vec![
+            "No".to_string(),
+            "Yes".to_string(),
+          ],
+        },
+    
+        default_value: DefaultValue::Text("No".to_string()),
+      },
+  
+      Score {
+        id: "m03a".to_string(),
+        label: "The three immersive experience screens are raised?".to_string(),
+        label_short: "Raised?".to_string(),
+        question_input: QuestionInput::Categorical { 
+          options: vec![
+            "No".to_string(),
+            "Yes".to_string(),
+          ],
+        },
+    
+        default_value: DefaultValue::Text("No".to_string()),
+      },
+  
+      Score {
+        id: "m04a".to_string(),
+        label: "Your team's LEGO® art piece is at least partly in the museum target area:".to_string(),
+        label_short: "In area?".to_string(),
+        question_input: QuestionInput::Categorical { 
+          options: vec![
+            "No".to_string(),
+            "Yes".to_string(),
+          ],
+        },
+    
+        default_value: DefaultValue::Text("No".to_string()),
+      },
+  
+      Score {
+        id: "m04b".to_string(),
+        label: "The art piece is completely supported by the pedestal?".to_string(),
+        label_short: "On pedestal?".to_string(),
+        question_input: QuestionInput::Categorical { 
+          options: vec![
+            "No".to_string(),
+            "Yes".to_string(),
+          ],
+        },
+    
+        default_value: DefaultValue::Text("No".to_string()),
+      },
+  
+      Score {
+        id: "m05a".to_string(),
+        label: "The augmented reality statue's orange lever is rotated completely to the right?".to_string(),
+        label_short: "Rotated?".to_string(),
+        question_input: QuestionInput::Categorical { 
+          options: vec![
+            "No".to_string(),
+            "Yes".to_string(),
+          ],
+        },
+    
+        default_value: DefaultValue::Text("No".to_string()),
+      },
+  
+      Score {
+        id: "m06a".to_string(),
+        label: "The lights' orange lever is rotated completely downwards?".to_string(),
+        label_short: "Lights?".to_string(),
+        question_input: QuestionInput::Categorical { 
+          options: vec![
+            "No".to_string(),
+            "Yes".to_string(),
+          ],
+        },
+    
+        default_value: DefaultValue::Text("No".to_string()),
+      },
+  
+      Score {
+        id: "m06b".to_string(),
+        label: "The speakers' orange lever is rotated completely to the left?".to_string(),
+        label_short: "Speakers?".to_string(),
+        question_input: QuestionInput::Categorical { 
+          options: vec![
+            "No".to_string(),
+            "Yes".to_string(),
+          ],
+        },
+    
+        default_value: DefaultValue::Text("No".to_string()),
+      },
+  
+      Score {
+        id: "m07a".to_string(),
+        label: "The performer's orange push activator is completely past the black stage set line?".to_string(),
+        label_short: "Turned?".to_string(),
+        question_input: QuestionInput::Categorical { 
+          options: vec![
+            "No".to_string(),
+            "Yes".to_string(),
+          ],
+        },
+    
+        default_value: DefaultValue::Text("No".to_string()),
+      },
+  
+      Score {
+        id: "m08a".to_string(),
+        label: "The rolling camera's white pointer is left of?".to_string(),
+        label_short: "Left of?".to_string(),
+        question_input: QuestionInput::Categorical { 
+          options: vec![
+            "None".to_string(),
+            "Dark blue".to_string(),
+            "Dark & medium blue".to_string(),
+            "Dark, medium & light blue".to_string(),
+          ],
+        },
+    
+        default_value: DefaultValue::Text("None".to_string()),
+      },
+  
+      Score {
+        id: "m09a".to_string(),
+        label: "The boat is touching the mat and is completely past the black scene line?".to_string(),
+        label_short: "Boat?".to_string(),
+        question_input: QuestionInput::Categorical { 
+          options: vec![
+            "No".to_string(),
+            "Yes".to_string(),
+          ],
+        },
+    
+        default_value: DefaultValue::Text("No".to_string()),
+      },
+  
+      Score {
+        id: "m09b".to_string(),
+        label: "The camera is touching the mat and is at least partly in the camera target area?".to_string(),
+        label_short: "Camera?".to_string(),
+        question_input: QuestionInput::Categorical { 
+          options: vec![
+            "No".to_string(),
+            "Yes".to_string(),
+          ],
+        },
+    
+        default_value: DefaultValue::Text("No".to_string()),
+      },
+  
+      Score {
+        id: "m10a".to_string(),
+        label: "Number of sound mixer sliders raised?".to_string(),
+        label_short: "Sliders?".to_string(),
+        question_input: QuestionInput::Categorical { 
+          options: vec![
+            "0".to_string(),
+            "1".to_string(),
+            "2".to_string(),
+            "3".to_string(),
+          ],
+        },
+    
+        default_value: DefaultValue::Text("0".to_string()),
+      },
+  
+      Score {
+        id: "m11a".to_string(),
+        label: "The light show's white pointer is within zone?".to_string(),
+        label_short: "Zone?".to_string(),
+        question_input: QuestionInput::Categorical { 
+          options: vec![
+            "None".to_string(),
+            "Yellow".to_string(),
+            "Green".to_string(),
+            "Blue".to_string(),
+          ],
+        },
+    
+        default_value: DefaultValue::Text("None".to_string()),
+      },
+  
+      Score {
+        id: "m12a".to_string(),
+        label: "The chicken is intact and has moved from its starting position?".to_string(),
+        label_short: "🐔 moved?".to_string(),
+        question_input: QuestionInput::Categorical { 
+          options: vec![
+            "No".to_string(),
+            "Yes".to_string(),
+          ],
+        },
+    
+        default_value: DefaultValue::Text("No".to_string()),
+      },
+  
+      Score {
+        id: "m12b".to_string(),
+        label: "The chicken is over or completely past the lavender dot?".to_string(),
+        label_short: "🐔 over dot?".to_string(),
+        question_input: QuestionInput::Categorical { 
+          options: vec![
+            "No".to_string(),
+            "Yes".to_string(),
+          ],
+        },
+    
+        default_value: DefaultValue::Text("No".to_string()),
+      },
+  
+      Score {
+        id: "m13a".to_string(),
+        label: "If the craft machine's orange and white lid is completely open?".to_string(),
+        label_short: "Lid?".to_string(),
+        question_input: QuestionInput::Categorical { 
+          options: vec![
+            "No".to_string(),
+            "Yes".to_string(),
+          ],
+        },
+    
+        default_value: DefaultValue::Text("No".to_string()),
+      },
+  
+      Score {
+        id: "m13b".to_string(),
+        label: "If the craft machine's light pink latch is pointing straight down?".to_string(),
+        label_short: "Latch?".to_string(),
+        question_input: QuestionInput::Categorical { 
+          options: vec![
+            "No".to_string(),
+            "Yes".to_string(),
+          ],
+        },
+    
+        default_value: DefaultValue::Text("No".to_string()),
+      },
+  
+      Score {
+        id: "m14a".to_string(),
+        label: "Number of audience members completely in a target destination?".to_string(),
+        label_short: "People?".to_string(),
+        question_input: QuestionInput::Categorical { 
+          options: vec![
+            "0".to_string(),
+            "1".to_string(),
+            "2".to_string(),
+            "3".to_string(),
+            "4".to_string(),
+            "5".to_string(),
+            "6".to_string(),
+            "7".to_string(),
+          ],
+        },
+    
+        default_value: DefaultValue::Text("0".to_string()),
+      },
+  
+      Score {
+        id: "m14b".to_string(),
+        label: "Number of destinations with at least one audience member completely in it?".to_string(),
+        label_short: "Destinations?".to_string(),
+        question_input: QuestionInput::Categorical { 
+          options: vec![
+            "0".to_string(),
+            "1".to_string(),
+            "2".to_string(),
+            "3".to_string(),
+            "4".to_string(),
+            "5".to_string(),
+            "6".to_string(),
+            "7".to_string(),
+          ],
+        },
+    
+        default_value: DefaultValue::Text("0".to_string()),
+      },
+  
+      Score {
+        id: "m15a".to_string(),
+        label: "Number of experts at least partly in their target destination?".to_string(),
+        label_short: "Experts?".to_string(),
+        question_input: QuestionInput::Categorical { 
+          options: vec![
+            "0".to_string(),
+            "1".to_string(),
+            "2".to_string(),
+            "3".to_string(),
+            "4".to_string(),
+            "5".to_string(),
+          ],
+        },
+    
+        default_value: DefaultValue::Text("0".to_string()),
+      },
+  
+      Score {
+        id: "m16a".to_string(),
+        label: "Precision?".to_string(),
+        label_short: "Number of precision tokens remaining?".to_string(),
+        question_input: QuestionInput::Categorical { 
+          options: vec![
+            "0".to_string(),
+            "1".to_string(),
+            "2".to_string(),
+            "3".to_string(),
+            "4".to_string(),
+            "5".to_string(),
+            "6".to_string(),
+          ],
+        },
+    
+        default_value: DefaultValue::Text("6".to_string()),
+      },
+  
+      Score {
+        id: "gp".to_string(),
+        label: "Gracious Professionalism® displayed at the robot game table?".to_string(),
+        label_short: "GP".to_string(),
+        question_input: QuestionInput::Categorical {
+          options: vec![
+            "2 - Developing".to_string(),
+            "3 - Accomplished".to_string(),
+            "4 - Exceeds".to_string()
+          ],
+        },
+        default_value: DefaultValue::Text("3 - Accomplished".to_string()),
+      },
+    ];
+  }
+
+  fn get_missions(&self) -> Vec<Mission> {
+    return vec![
+      Mission {
+        prefix: "m00".to_string(),
+        title: "M00 - Equipment Inspection Bonus".to_string(),
+        image: None,
+      },
+    
+      Mission {
+        prefix: "m01".to_string(),
+        title: "M01 - 3D Cinema".to_string(),
+        image: Some(MISSION_PICS_20232024[0].url.to_string()),
+      },
+    
+      Mission {
+        prefix: "m02".to_string(),
+        title: "M02 - Theatre Scene Change".to_string(),
+        image: Some(MISSION_PICS_20232024[1].url.to_string()),
+      },
+    
+      Mission {
+        prefix: "m03".to_string(),
+        title: "M03 - Immersive Experience".to_string(),
+        image: Some(MISSION_PICS_20232024[2].url.to_string()),
+      },
+    
+      Mission {
+        prefix: "m04".to_string(),
+        title: "M04 - MASTERPIECE℠".to_string(),
+        image: Some(MISSION_PICS_20232024[3].url.to_string()),
+      },
+    
+      Mission {
+        prefix: "m05".to_string(),
+        title: "M05 - Augmented Reality Statue".to_string(),
+        image: Some(MISSION_PICS_20232024[4].url.to_string()),
+      },
+    
+      Mission {
+        prefix: "m06".to_string(),
+        title: "M06 - Music Concert Light and Sound".to_string(),
+        image: Some(MISSION_PICS_20232024[5].url.to_string()),
+      },
+    
+      Mission {
+        prefix: "m07".to_string(),
+        title: "M07 - Hologram Performer".to_string(),
+        image: Some(MISSION_PICS_20232024[6].url.to_string()),
+      },
+    
+      Mission {
+        prefix: "m08".to_string(),
+        title: "M08 - Rolling Camera".to_string(),
+        image: Some(MISSION_PICS_20232024[7].url.to_string()),
+      },
+    
+      Mission {
+        prefix: "m09".to_string(),
+        title: "M09 - Movie Set".to_string(),
+        image: Some(MISSION_PICS_20232024[8].url.to_string()),
+      },
+    
+      Mission {
+        prefix: "m10".to_string(),
+        title: "M10 - Sound Mixer".to_string(),
+        image: Some(MISSION_PICS_20232024[9].url.to_string()),
+      },
+    
+      Mission {
+        prefix: "m11".to_string(),
+        title: "M11 - Light Show".to_string(),
+        image: Some(MISSION_PICS_20232024[10].url.to_string()),
+      },
+    
+      Mission {
+        prefix: "m12".to_string(),
+        title: "M12 - Virtual Reality Artist".to_string(),
+        image: Some(MISSION_PICS_20232024[11].url.to_string()),
+      },
+    
+      Mission {
+        prefix: "m13".to_string(),
+        title: "M13 - Craft Creator".to_string(),
+        image: Some(MISSION_PICS_20232024[12].url.to_string()),
+      },
+    
+      Mission {
+        prefix: "m14".to_string(),
+        title: "M14 - Audience Delivery".to_string(),
+        image: Some(MISSION_PICS_20232024[13].url.to_string()),
+      },
+    
+      Mission {
+        prefix: "m15".to_string(),
+        title: "M15 - Expert Delivery".to_string(),
+        image: Some(MISSION_PICS_20232024[14].url.to_string()),
+      },
+    
+      Mission {
+        prefix: "m16".to_string(),
+        title: "M16 - Precision Tokens".to_string(),
+        image: Some(MISSION_PICS_20232024[15].url.to_string()),
+      },
+    
+      Mission {
+        prefix: "gp".to_string(),
+        title: "Gracious Professionalism".to_string(),
+        image: None,
+      },
+    ];
+  }
+
+  fn get_game(&self) -> crate::schemas::Game {
+    return crate::schemas::Game {
+      name: "Masterpiece".to_string(),
+      program: "FLL_CHALLENGE".to_string(),
+      missions: self.get_missions(),
+      questions: self.get_questions(),
+    };
+  }
+
+  fn validate(&self, answers: Vec<ScoreAnswer>) -> Vec<ScoreError> {
+    let mut errors: Vec<ScoreError> = vec![];
+    let mut empty_q_ids: Vec<String> = vec![];
+    let n_empty_ids = answers.iter().filter(|r| r.answer == "").count();
+
+    for r in answers.clone() {
+      if r.answer == "" {
+        empty_q_ids.push(r.id.clone());
+      }
+    }
+
+    if n_empty_ids > 0 {
+      errors.push(ScoreError {
+        id: empty_q_ids.join(","),
+        message: format!("{} empty answers", n_empty_ids),
+      });
+    }
+
+    let m14a = answers.iter().find(|r| r.id == "m14a").unwrap().answer.clone();
+    let m14b = answers.iter().find(|r| r.id == "m14b").unwrap().answer.clone();
+    if m14a != "0" && m14b == "0" {
+      errors.push(ScoreError {
+        id: "m14a,m14b".to_string(),
+        message: "Audiences delivered, but no destinations set!".to_string(),
+      });
+    }
+
+    return errors;
+  }
+}

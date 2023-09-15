@@ -1,2 +1,39 @@
 pub mod firebase_links;
 pub mod schemas;
+
+use schemas::*;
+
+#[cfg(feature = "wasm")]
+use wasm_bindgen::prelude::*;
+
+#[cfg(feature = "wasm")]
+use wasm_bindgen::*;
+
+#[cfg(feature = "wasm")]
+use serde_wasm_bindgen::*;
+
+macro_rules! wasm_validator {
+  ($name:ident, $type:ident) => {
+    pub fn $name(answers: &Vec<ScoreAnswer>) -> Vec<ScoreError> {
+      let game = $type;
+      game.validate(answers.clone())
+    }
+    
+    paste::item! {
+      #[cfg(feature = "wasm")]
+      #[wasm_bindgen]
+      pub fn [<wasm_ $name>](answers: JsValue) -> JsValue {
+          let a: Vec<ScoreAnswer> = serde_wasm_bindgen::from_value(answers).unwrap();
+          let errors = $name(&a);
+          serde_wasm_bindgen::to_value(&errors).unwrap()
+        }
+      }
+  };
+}
+
+wasm_validator!(masterpiece_validate, Masterpiece);
+
+#[no_mangle]
+pub extern "C" fn add_one(x: i32) -> i32 {
+  x + 1
+}

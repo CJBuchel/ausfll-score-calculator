@@ -1,6 +1,7 @@
-use serde::{Deserialize, Serialize};
+use schemars::Map;
+use serde::{Deserialize, Serialize, Serializer};
 
-use super::{get_missions_20232024, get_questions_20232024};
+use super::Masterpiece;
 
 #[derive(schemars::JsonSchema, Deserialize, Serialize, Clone)]
 pub struct ScoreAnswer {
@@ -59,25 +60,58 @@ pub struct MissionPicture { // this is kept as a static because nothing else use
 pub struct Game {
   pub name: String,
   pub program: String,
-  pub season: u32, // 20232024
   pub missions: Vec<Mission>,
   pub questions: Vec<Score>,
 }
 
-#[derive(schemars::JsonSchema, Deserialize, Serialize, Clone)]
-pub struct Games {
-  pub game_2023: Game,
+
+pub trait AusFLLGame { // main template (does not get serialized, just for ease inside the library)
+  fn get_questions(&self) -> Vec<Score>;
+  fn get_missions(&self) -> Vec<Mission>;
+  fn get_game(&self) -> Game;
+  fn validate(&self, answers: Vec<ScoreAnswer>) -> Vec<ScoreError>;
 }
 
-// get all the games to generate the schemas
-pub fn get_games() -> Games {
-  Games {
-    game_2023: Game {
-      name: "Masterpiece".to_string(),
-      program: "FLL_CHALLENGE".to_string(),
-      season: 20232024,
-      missions: get_missions_20232024(),
-      questions: get_questions_20232024(),
-    },
+// #[derive(schemars::JsonSchema, Deserialize, Serialize, Clone)]
+pub struct GameMap(Map<u32, Box<dyn AusFLLGame>>);
+
+impl GameMap {
+  pub fn new() -> Self {
+    GameMap(Map::new())
+  }
+
+  pub fn insert(&mut self, key: u32, value: Box<dyn AusFLLGame>) {
+    self.0.insert(key, value);
+  }
+
+  pub fn iter(&self) -> impl Iterator<Item = (&u32, &Box<dyn AusFLLGame>)> {
+    self.0.iter()
   }
 }
+
+impl Serialize for GameMap {
+  fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
+  where
+    S: Serializer,
+  {
+    use serde::ser::SerializeMap;
+
+    let mut map = serializer.serialize_map(Some(self.0.len()))?;
+    for (key, value) in &self.0 {
+      map.serialize_entry(key, &value.get_game())?;
+    }
+    map.end()
+  }
+}
+
+pub struct Games;
+
+// get all the games to generate the schemas
+impl Games {
+  pub fn get_games() -> GameMap {
+    let mut games = GameMap::new();
+    games.insert(2023, Box::new(Masterpiece));
+    games
+  }
+}
+

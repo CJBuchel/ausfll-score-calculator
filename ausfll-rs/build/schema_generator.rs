@@ -3,7 +3,7 @@ use std::ffi::OsString;
 use std::path::Path;
 use std::fs;
 
-use schema_utils::schemas::{ScoreAnswer, DefaultValue, QuestionInput, Score, ScoreError, Mission, MissionPicture, Game, Games, get_games};
+use schema_utils::schemas::{ScoreAnswer, DefaultValue, QuestionInput, Score, ScoreError, Mission, MissionPicture, Game, Games};
 use schemars::JsonSchema;
 
 #[derive(JsonSchema, Clone)]
@@ -16,11 +16,10 @@ pub struct AusFLLSchema {
   pub mission: Mission,
   pub mission_picture: MissionPicture,
   pub game: Game,
-  pub games: Games,
 }
 
 fn generate_games_json(outdir: &OsString) {
-  let games = get_games();
+  let games = Games::get_games();
   let json = serde_json::to_string(&games).expect("Failed to serialize missions");
   let json_file = Path::new(outdir).join("games.json");
   fs::write(json_file, json).expect("Failed to write missions json");
@@ -35,4 +34,16 @@ fn generate_types_schema(outdir: &OsString) {
 pub fn generate_schema(outdir: &OsString) {
   generate_games_json(outdir);
   generate_types_schema(outdir);
+
+  // run command to convert them to relative lanuages
+  let npm_dir = Path::new(outdir).join("../");
+  let status = std::process::Command::new("npm")
+    .args(&["run", "convert"])
+    .current_dir(npm_dir)
+    .status()
+    .expect("Failed to convert to relative languages.");
+
+  if !status.success() {
+    panic!("Failed to convert schema files");
+  }
 }
