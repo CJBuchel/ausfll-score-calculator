@@ -31,7 +31,27 @@ macro_rules! wasm_validator {
   };
 }
 
+macro_rules! wasm_scorer {
+  ($name:ident, $type:ident) => {
+    pub fn $name(answers: &Vec<ScoreAnswer>) -> i32 {
+      let game = $type;
+      game.score(answers.clone())
+    }
+    
+    paste::item! {
+      #[cfg(feature = "wasm")]
+      #[wasm_bindgen]
+      pub fn [<wasm_ $name>](answers: JsValue) -> JsValue {
+          let a: Vec<ScoreAnswer> = serde_wasm_bindgen::from_value(answers).unwrap();
+          let errors = $name(&a);
+          serde_wasm_bindgen::to_value(&errors).unwrap()
+        }
+      }
+  };
+}
+
 wasm_validator!(masterpiece_validate, Masterpiece);
+wasm_scorer!(masterpiece_score, Masterpiece);
 
 #[no_mangle]
 pub extern "C" fn add_one(x: i32) -> i32 {

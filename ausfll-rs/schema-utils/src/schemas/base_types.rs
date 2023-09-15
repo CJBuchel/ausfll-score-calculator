@@ -70,6 +70,22 @@ pub trait AusFLLGame { // main template (does not get serialized, just for ease 
   fn get_missions(&self) -> Vec<Mission>;
   fn get_game(&self) -> Game;
   fn validate(&self, answers: Vec<ScoreAnswer>) -> Vec<ScoreError>;
+  fn score(&self, answers: Vec<ScoreAnswer>) -> i32;
+
+  // generic answering functions
+  fn s_answer(&self, answers: Vec<ScoreAnswer>, q: &str) -> String {
+    match answers.iter().find(|r| r.id == q.to_string()) {
+      Some(r) => r.answer.clone(),
+      None => String::from(""),
+    }
+  }
+
+  fn n_answer(&self, answers: Vec<ScoreAnswer>, q: &str) -> i32 {
+    match answers.iter().find(|r| r.id == q.to_string()) {
+      Some(r) => r.answer.parse::<i32>().unwrap_or(0),
+      None => 0,
+    }
+  }
 }
 
 // #[derive(schemars::JsonSchema, Deserialize, Serialize, Clone)]

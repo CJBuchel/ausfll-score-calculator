@@ -537,4 +537,121 @@ impl AusFLLGame for Masterpiece {
 
     return errors;
   }
+
+  fn score(&self, answers: Vec<ScoreAnswer>) -> i32 {
+    let mut score = 0;
+    // M00
+    if self.s_answer(answers.clone(), "m00a") == "Yes" { score += 25; }
+
+    // M01 - 20 points if achieved
+    if self.s_answer(answers.clone(), "m01a") == "Yes" { score += 20; }
+
+    // M02 - 10 points per level
+    let matching = self.s_answer(answers.clone(), "m02b") == "Yes";
+    match self.s_answer(answers.clone(), "m02a").as_str() {
+      "Blue" => score += 10 + if matching { 20 } else { 0 },
+      "Pink" => score += 20 + if matching { 30 } else { 0 },
+      "Orange" => score += 30 + if matching { 10 } else { 0 },
+      _ => score += 0
+    }
+
+    // M03 - 20 points if Yes
+    if self.s_answer(answers.clone(), "m03a") == "Yes" { score += 20; }
+
+    // M04 - 10 points for a, 20 points for b
+    if self.s_answer(answers.clone(), "m04a") == "Yes" {
+      if self.s_answer(answers.clone(), "m04b") == "Yes" { score += 20 }
+      score += 10;
+    }
+
+    // M05 - 30 points if Yes
+    if self.s_answer(answers.clone(), "m05a") == "Yes" { score += 30; }
+
+    // M06 - 10 points each
+    if self.s_answer(answers.clone(), "m06a") == "Yes" { score += 10; }
+    if self.s_answer(answers.clone(), "m06b") == "Yes" { score += 10; }
+
+    // M07 - 20 points if Yes
+    if self.s_answer(answers.clone(), "m07a") == "Yes" { score += 20; }
+
+    // M08 - 10 points per level
+    match self.s_answer(answers.clone(), "m08a").as_str() {
+      "Dark blue" => score += 10,
+      "Dark & medium blue" => score += 20,
+      "Dark, medium & light blue" => score += 30,
+      _ => score += 0
+    }
+
+    // M09 - 10 points each
+    if self.s_answer(answers.clone(), "m09a") == "Yes" { score += 10; }
+    if self.s_answer(answers.clone(), "m09b") == "Yes" { score += 10; }
+
+    // M10 - 10 points each
+    match self.s_answer(answers.clone(), "m10a").as_str() {
+      "1" => score += 10,
+      "2" => score += 20,
+      "3" => score += 30,
+      _ => score += 0
+    }
+
+    // M11 - 10 points each
+    match self.s_answer(answers.clone(), "m11a").as_str() {
+      "Yellow" => score += 10,
+      "Green" => score += 20,
+      "Blue" => score += 30,
+      _ => score += 0
+    }
+
+    // M12 - 10 points for a, 30 points if a + b
+    if self.s_answer(answers.clone(), "m12a") == "Yes" {
+      if self.s_answer(answers.clone(), "m12b") == "Yes" { score += 20 }
+      score += 10;
+    }
+
+    // M14 - 5 each for a, 5 each for b
+    match self.s_answer(answers.clone(), "m14a").as_str() {
+      "1" => score += 5,
+      "2" => score += 10,
+      "3" => score += 15,
+      "4" => score += 20, // heh, 420
+      "5" => score += 25,
+      "6" => score += 30,
+      "7" => score += 35,
+      _ => score += 0
+    }
+
+    match self.s_answer(answers.clone(), "m14b").as_str() {
+      "1" => score += 5,
+      "2" => score += 10,
+      "3" => score += 15,
+      "4" => score += 20,
+      "5" => score += 25,
+      "6" => score += 30,
+      "7" => score += 35,
+      _ => score += 0
+    }
+
+    // M15 - 10 each
+    match self.s_answer(answers.clone(), "m15a").as_str() {
+      "1" => score += 10,
+      "2" => score += 20,
+      "3" => score += 30,
+      "4" => score += 40,
+      "5" => score += 50,
+      _ => score += 0
+    }
+
+    // M16
+    match self.s_answer(answers.clone(), "m16a").as_str() {
+      "6" => score += 50,
+      "5" => score += 50,
+      "4" => score += 35,
+      "3" => score += 25,
+      "2" => score += 15,
+      "1" => score += 10,
+      _ => score += 0
+    }
+
+    return score;
+  }
 }

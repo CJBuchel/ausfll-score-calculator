@@ -36,10 +36,9 @@ pub fn generate_schema(outdir: &OsString) {
   generate_types_schema(outdir);
 
   // run command to convert them to relative lanuages
-  let npm_dir = Path::new(outdir).join("../");
+  // let npm_dir = Path::new(outdir).join("../");
   let status = std::process::Command::new("npm")
     .args(&["run", "convert"])
-    .current_dir(npm_dir)
     .status()
     .expect("Failed to convert to relative languages.");
 
