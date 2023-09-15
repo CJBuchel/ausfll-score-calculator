@@ -1,22 +1,22 @@
-use schemars::Map;
+use schemars::{Map, JsonSchema};
 use serde::{Deserialize, Serialize, Serializer};
 
 use super::Masterpiece;
 
-#[derive(schemars::JsonSchema, Deserialize, Serialize, Clone)]
+#[derive(JsonSchema, Deserialize, Serialize, Clone)]
 pub struct ScoreAnswer {
   pub id: String,
   pub answer: String,
 }
 
-#[derive(schemars::JsonSchema, Deserialize, Serialize, Clone)]
+#[derive(JsonSchema, Deserialize, Serialize, Clone)]
 pub enum DefaultValue {
   Number(i32),
   Text(String),
 }
 
 // add for more inputs
-#[derive(schemars::JsonSchema, Deserialize, Serialize, Clone)]
+#[derive(JsonSchema, Deserialize, Serialize, Clone)]
 pub enum QuestionInput {
   Numerical {
     min: i32,
@@ -28,7 +28,7 @@ pub enum QuestionInput {
   }
 }
 
-#[derive(schemars::JsonSchema, Deserialize, Serialize, Clone)]
+#[derive(JsonSchema, Deserialize, Serialize, Clone)]
 pub struct Score {
   pub id: String,
   pub label: String,
@@ -37,26 +37,26 @@ pub struct Score {
   pub default_value: DefaultValue,
 }
 
-#[derive(schemars::JsonSchema, Deserialize, Serialize, Clone)]
+#[derive(JsonSchema, Deserialize, Serialize, Clone)]
 pub struct ScoreError {
   pub id: String,
   pub message: String,
 }
 
-#[derive(schemars::JsonSchema, Deserialize, Serialize, Clone)]
+#[derive(JsonSchema, Deserialize, Serialize, Clone)]
 pub struct Mission {
   pub prefix: String,
   pub title: String,
   pub image: Option<String>,
 }
 
-#[derive(schemars::JsonSchema, Deserialize, Serialize, Clone)]
+#[derive(JsonSchema, Deserialize, Serialize, Clone)]
 pub struct MissionPicture { // this is kept as a static because nothing else uses it expects the missions. 
   pub prefix: &'static str, // m00/m01 etc..
   pub url: &'static str, // see firebase_links.rs
 }
 
-#[derive(schemars::JsonSchema, Deserialize, Serialize, Clone)]
+#[derive(JsonSchema, Deserialize, Serialize, Clone)]
 pub struct Game {
   pub name: String,
   pub program: String,

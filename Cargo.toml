@@ -1,7 +1,0 @@
-[workspace]
-members = [
-  "ausfll-rs",
-]
-
-# npm is required to convert .json to ts and dart
-# // make sure `rustup target add wasm32-unknown-unknown` has been run before compiling

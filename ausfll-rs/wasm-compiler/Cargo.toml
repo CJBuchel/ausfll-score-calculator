@@ -1,5 +1,5 @@
 [package]
-name = "schema-utils"
+name = "wasm-compiler"
 version = "0.1.0"
 edition = "2021"
 
@@ -8,11 +8,11 @@ default = []
 wasm = []
 
 [lib]
-crate-type = ["rlib"]
+crate-type = ["cdylib"]
 
 [dependencies]
+schema-utils = { path = "../schema-utils" }
 paste = "1.0.14"
-schemars = "^0.8"
 serde = "1.0.188"
 serde_json = "1.0.105"
 wasm-bindgen = { version = "0.2.87", features = ["serde"] }
