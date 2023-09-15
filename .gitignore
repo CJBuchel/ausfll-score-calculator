@@ -1,2 +1,20 @@
-/target
-/node_modules
+# Binaries for programs and plugins
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.kvdb
+
+# Added by cargo
+
+target/
+old/
+debug/
+Cargo.lock
+**/*.rs.bk
+
+*.sqlite
+*.db
+
+node_modules/
