@@ -89,18 +89,22 @@ pub trait AusFLLGame { // main template (does not get serialized, just for ease 
 }
 
 // #[derive(schemars::JsonSchema, Deserialize, Serialize, Clone)]
-pub struct GameMap(Map<u32, Box<dyn AusFLLGame>>);
+pub struct GameMap(Map<String, Box<dyn AusFLLGame>>);
 
 impl GameMap {
   pub fn new() -> Self {
     GameMap(Map::new())
   }
 
-  pub fn insert(&mut self, key: u32, value: Box<dyn AusFLLGame>) {
-    self.0.insert(key, value);
+  pub fn insert(&mut self, key: &str, value: Box<dyn AusFLLGame>) {
+    self.0.insert(key.to_string(), value);
   }
 
-  pub fn iter(&self) -> impl Iterator<Item = (&u32, &Box<dyn AusFLLGame>)> {
+  pub fn get(&self, key: &str) -> Option<&Box<dyn AusFLLGame>> {
+    self.0.get(key)
+  }
+
+  pub fn iter(&self) -> impl Iterator<Item = (&String, &Box<dyn AusFLLGame>)> {
     self.0.iter()
   }
 }
@@ -126,7 +130,7 @@ pub struct Games;
 impl Games {
   pub fn get_games() -> GameMap {
     let mut games = GameMap::new();
-    games.insert(2023, Box::new(Masterpiece));
+    games.insert("2023", Box::new(Masterpiece));
     games
   }
 }
