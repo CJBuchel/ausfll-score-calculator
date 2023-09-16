@@ -1,12 +1,10 @@
 use schema_utils::schemas::*;
 
-#[cfg(feature = "wasm")]
 use wasm_bindgen::prelude::*;
 
-#[cfg(feature = "wasm")]
 use wasm_bindgen::*;
 
-#[cfg(feature = "wasm")]
+
 use serde_wasm_bindgen::*;
 
 macro_rules! wasm_validator {
@@ -17,7 +15,6 @@ macro_rules! wasm_validator {
     }
     
     paste::item! {
-      #[cfg(feature = "wasm")]
       #[wasm_bindgen]
       pub fn [<wasm_ $name>](answers: JsValue) -> JsValue {
           let a: Vec<ScoreAnswer> = serde_wasm_bindgen::from_value(answers).unwrap();
@@ -36,7 +33,6 @@ macro_rules! wasm_scorer {
     }
     
     paste::item! {
-      #[cfg(feature = "wasm")]
       #[wasm_bindgen]
       pub fn [<wasm_ $name>](answers: JsValue) -> JsValue {
           let a: Vec<ScoreAnswer> = serde_wasm_bindgen::from_value(answers).unwrap();

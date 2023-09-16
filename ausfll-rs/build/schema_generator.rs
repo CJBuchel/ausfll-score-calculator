@@ -21,7 +21,7 @@ pub struct AusFLLSchema {
 fn generate_games_json(outdir: &OsString) {
   let games = Games::get_games();
   let json = serde_json::to_string(&games).expect("Failed to serialize missions");
-  let json_file = Path::new(outdir).join("games.json");
+  let json_file = Path::new(outdir).join("ausfll_games.json");
   fs::write(json_file, json).expect("Failed to write missions json");
 }
 
