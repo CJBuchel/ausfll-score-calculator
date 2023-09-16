@@ -1,0 +1,14 @@
+{
+  "name": "ausfll-wasm",
+  "version": "0.1.0",
+  "files": [
+    "ausfll_wasm_bg.wasm",
+    "ausfll_wasm.js",
+    "ausfll_wasm.d.ts"
+  ],
+  "module": "ausfll_wasm.js",
+  "types": "ausfll_wasm.d.ts",
+  "sideEffects": [
+    "./snippets/*"
+  ]
+}
