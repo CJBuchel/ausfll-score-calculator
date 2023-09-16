@@ -1,41 +1,31 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "AusFLLSchema",
+  "title": "Game",
   "type": "object",
   "required": [
-    "default_value",
-    "game",
-    "mission",
-    "mission_picture",
-    "question_input",
-    "score",
-    "score_answer",
-    "score_error"
+    "missions",
+    "name",
+    "program",
+    "questions"
   ],
   "properties": {
-    "default_value": {
-      "$ref": "#/definitions/DefaultValue"
+    "missions": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Mission"
+      }
     },
-    "game": {
-      "$ref": "#/definitions/Game"
+    "name": {
+      "type": "string"
     },
-    "mission": {
-      "$ref": "#/definitions/Mission"
+    "program": {
+      "type": "string"
     },
-    "mission_picture": {
-      "$ref": "#/definitions/MissionPicture"
-    },
-    "question_input": {
-      "$ref": "#/definitions/QuestionInput"
-    },
-    "score": {
-      "$ref": "#/definitions/Score"
-    },
-    "score_answer": {
-      "$ref": "#/definitions/ScoreAnswer"
-    },
-    "score_error": {
-      "$ref": "#/definitions/ScoreError"
+    "questions": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Score"
+      }
     }
   },
   "definitions": {
@@ -68,35 +58,6 @@
         }
       ]
     },
-    "Game": {
-      "type": "object",
-      "required": [
-        "missions",
-        "name",
-        "program",
-        "questions"
-      ],
-      "properties": {
-        "missions": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Mission"
-          }
-        },
-        "name": {
-          "type": "string"
-        },
-        "program": {
-          "type": "string"
-        },
-        "questions": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Score"
-          }
-        }
-      }
-    },
     "Mission": {
       "type": "object",
       "required": [
@@ -114,21 +75,6 @@
           "type": "string"
         },
         "title": {
-          "type": "string"
-        }
-      }
-    },
-    "MissionPicture": {
-      "type": "object",
-      "required": [
-        "prefix",
-        "url"
-      ],
-      "properties": {
-        "prefix": {
-          "type": "string"
-        },
-        "url": {
           "type": "string"
         }
       }
@@ -210,36 +156,6 @@
         },
         "question_input": {
           "$ref": "#/definitions/QuestionInput"
-        }
-      }
-    },
-    "ScoreAnswer": {
-      "type": "object",
-      "required": [
-        "answer",
-        "id"
-      ],
-      "properties": {
-        "answer": {
-          "type": "string"
-        },
-        "id": {
-          "type": "string"
-        }
-      }
-    },
-    "ScoreError": {
-      "type": "object",
-      "required": [
-        "id",
-        "message"
-      ],
-      "properties": {
-        "id": {
-          "type": "string"
-        },
-        "message": {
-          "type": "string"
         }
       }
     }

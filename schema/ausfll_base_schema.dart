@@ -1,16 +1,15 @@
 // To parse this JSON data, do
 //
-//     final ausfllSchema = ausfllSchemaFromJson(jsonString);
+//     final ausfllBaseSchema = ausfllBaseSchemaFromJson(jsonString);
 
 import 'dart:convert';
 
-AusfllSchema ausfllSchemaFromJson(String str) => AusfllSchema.fromJson(json.decode(str));
+AusfllBaseSchema ausfllBaseSchemaFromJson(String str) => AusfllBaseSchema.fromJson(json.decode(str));
 
-String ausfllSchemaToJson(AusfllSchema data) => json.encode(data.toJson());
+String ausfllBaseSchemaToJson(AusfllBaseSchema data) => json.encode(data.toJson());
 
-class AusfllSchema {
+class AusfllBaseSchema {
     DefaultValue defaultValue;
-    Game game;
     Mission mission;
     MissionPicture missionPicture;
     QuestionInput questionInput;
@@ -18,9 +17,8 @@ class AusfllSchema {
     ScoreAnswer scoreAnswer;
     ScoreError scoreError;
 
-    AusfllSchema({
+    AusfllBaseSchema({
         required this.defaultValue,
-        required this.game,
         required this.mission,
         required this.missionPicture,
         required this.questionInput,
@@ -29,9 +27,8 @@ class AusfllSchema {
         required this.scoreError,
     });
 
-    factory AusfllSchema.fromJson(Map<String, dynamic> json) => AusfllSchema(
+    factory AusfllBaseSchema.fromJson(Map<String, dynamic> json) => AusfllBaseSchema(
         defaultValue: DefaultValue.fromJson(json["default_value"]),
-        game: Game.fromJson(json["game"]),
         mission: Mission.fromJson(json["mission"]),
         missionPicture: MissionPicture.fromJson(json["mission_picture"]),
         questionInput: QuestionInput.fromJson(json["question_input"]),
@@ -42,7 +39,6 @@ class AusfllSchema {
 
     Map<String, dynamic> toJson() => {
         "default_value": defaultValue.toJson(),
-        "game": game.toJson(),
         "mission": mission.toJson(),
         "mission_picture": missionPicture.toJson(),
         "question_input": questionInput.toJson(),
@@ -72,34 +68,6 @@ class DefaultValue {
     };
 }
 
-class Game {
-    List<Mission> missions;
-    String name;
-    String program;
-    List<Score> questions;
-
-    Game({
-        required this.missions,
-        required this.name,
-        required this.program,
-        required this.questions,
-    });
-
-    factory Game.fromJson(Map<String, dynamic> json) => Game(
-        missions: List<Mission>.from(json["missions"].map((x) => Mission.fromJson(x))),
-        name: json["name"],
-        program: json["program"],
-        questions: List<Score>.from(json["questions"].map((x) => Score.fromJson(x))),
-    );
-
-    Map<String, dynamic> toJson() => {
-        "missions": List<dynamic>.from(missions.map((x) => x.toJson())),
-        "name": name,
-        "program": program,
-        "questions": List<dynamic>.from(questions.map((x) => x.toJson())),
-    };
-}
-
 class Mission {
     String? image;
     String prefix;
@@ -124,35 +92,23 @@ class Mission {
     };
 }
 
-class Score {
-    DefaultValue defaultValue;
-    String id;
-    String label;
-    String labelShort;
-    QuestionInput questionInput;
+class MissionPicture {
+    String prefix;
+    String url;
 
-    Score({
-        required this.defaultValue,
-        required this.id,
-        required this.label,
-        required this.labelShort,
-        required this.questionInput,
+    MissionPicture({
+        required this.prefix,
+        required this.url,
     });
 
-    factory Score.fromJson(Map<String, dynamic> json) => Score(
-        defaultValue: DefaultValue.fromJson(json["default_value"]),
-        id: json["id"],
-        label: json["label"],
-        labelShort: json["label_short"],
-        questionInput: QuestionInput.fromJson(json["question_input"]),
+    factory MissionPicture.fromJson(Map<String, dynamic> json) => MissionPicture(
+        prefix: json["prefix"],
+        url: json["url"],
     );
 
     Map<String, dynamic> toJson() => {
-        "default_value": defaultValue.toJson(),
-        "id": id,
-        "label": label,
-        "label_short": labelShort,
-        "question_input": questionInput.toJson(),
+        "prefix": prefix,
+        "url": url,
     };
 }
 
@@ -212,23 +168,35 @@ class Numerical {
     };
 }
 
-class MissionPicture {
-    String prefix;
-    String url;
+class Score {
+    DefaultValue defaultValue;
+    String id;
+    String label;
+    String labelShort;
+    QuestionInput questionInput;
 
-    MissionPicture({
-        required this.prefix,
-        required this.url,
+    Score({
+        required this.defaultValue,
+        required this.id,
+        required this.label,
+        required this.labelShort,
+        required this.questionInput,
     });
 
-    factory MissionPicture.fromJson(Map<String, dynamic> json) => MissionPicture(
-        prefix: json["prefix"],
-        url: json["url"],
+    factory Score.fromJson(Map<String, dynamic> json) => Score(
+        defaultValue: DefaultValue.fromJson(json["default_value"]),
+        id: json["id"],
+        label: json["label"],
+        labelShort: json["label_short"],
+        questionInput: QuestionInput.fromJson(json["question_input"]),
     );
 
     Map<String, dynamic> toJson() => {
-        "prefix": prefix,
-        "url": url,
+        "default_value": defaultValue.toJson(),
+        "id": id,
+        "label": label,
+        "label_short": labelShort,
+        "question_input": questionInput.toJson(),
     };
 }
 

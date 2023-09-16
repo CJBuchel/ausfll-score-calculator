@@ -6,9 +6,6 @@
     "ausfll_wasm.js",
     "ausfll_wasm.d.ts"
   ],
-  "module": "ausfll_wasm.js",
-  "types": "ausfll_wasm.d.ts",
-  "sideEffects": [
-    "./snippets/*"
-  ]
+  "main": "ausfll_wasm.js",
+  "types": "ausfll_wasm.d.ts"
 }

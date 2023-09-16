@@ -3,32 +3,35 @@ use std::ffi::OsString;
 use std::path::Path;
 use std::fs;
 
-use schema_utils::schemas::{ScoreAnswer, DefaultValue, QuestionInput, Score, ScoreError, Mission, MissionPicture, Game, Games};
+use schema_utils::schemas::{Game, Games, ScoreAnswer, DefaultValue, QuestionInput, Score, ScoreError, Mission, MissionPicture};
 use schemars::JsonSchema;
+use serde::Serialize;
 
-#[derive(JsonSchema, Clone)]
-pub struct AusFLLSchema {
-  pub score_answer: ScoreAnswer,
-  pub default_value: DefaultValue,
-  pub question_input: QuestionInput,
-  pub score: Score,
-  pub score_error: ScoreError,
-  pub mission: Mission,
-  pub mission_picture: MissionPicture,
-  pub game: Game,
+#[derive(JsonSchema, Serialize, Clone)]
+struct BaseSchema {
+  score_answer: ScoreAnswer,
+  default_value: DefaultValue,
+  question_input: QuestionInput,
+  score: Score,
+  score_error: ScoreError,
+  mission: Mission,
+  mission_picture: MissionPicture,
 }
 
 fn generate_games_json(outdir: &OsString) {
   let games = Games::get_games();
   let json = serde_json::to_string(&games).expect("Failed to serialize missions");
   let json_file = Path::new(outdir).join("ausfll_games.json");
-  fs::write(json_file, json).expect("Failed to write missions json");
+  fs::write(json_file, serde_json::to_string(&json).unwrap()).expect("Failed to write missions json");
 }
 
 fn generate_types_schema(outdir: &OsString) {
-  let schema = schemars::schema_for!(AusFLLSchema);
-  let schema_file = Path::new(outdir).join("ausfll_schema.json");
-  fs::write(schema_file, serde_json::to_string_pretty(&schema).unwrap()).unwrap();
+  let base_schema = schemars::schema_for!(BaseSchema);
+  let game_schema = schemars::schema_for!(Game);
+  let game_schema_file = Path::new(outdir).join("ausfll_game_schema.json");
+  let base_schema_file = Path::new(outdir).join("ausfll_base_schema.json");
+  fs::write(game_schema_file.clone(), serde_json::to_string_pretty(&game_schema).unwrap()).unwrap();
+  fs::write(base_schema_file.clone(), serde_json::to_string_pretty(&base_schema).unwrap()).unwrap();
 }
 
 pub fn generate_schema(outdir: &OsString) {

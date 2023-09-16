@@ -499,15 +499,6 @@ impl AusFLLGame for Masterpiece {
     ];
   }
 
-  fn get_game(&self) -> crate::schemas::Game {
-    return crate::schemas::Game {
-      name: "Masterpiece".to_string(),
-      program: "FLL_CHALLENGE".to_string(),
-      missions: self.get_missions(),
-      questions: self.get_questions(),
-    };
-  }
-
   fn validate(&self, answers: Vec<ScoreAnswer>) -> Vec<ScoreError> {
     let mut errors: Vec<ScoreError> = vec![];
     let mut empty_q_ids: Vec<String> = vec![];
@@ -525,9 +516,9 @@ impl AusFLLGame for Masterpiece {
         message: format!("{} empty answers", n_empty_ids),
       });
     }
-
-    let m14a = answers.iter().find(|r| r.id == "m14a").unwrap().answer.clone();
-    let m14b = answers.iter().find(|r| r.id == "m14b").unwrap().answer.clone();
+    
+    let m14a = self.s_answer(answers.clone(), "m14a");
+    let m14b = self.s_answer(answers.clone(), "m14b");
     if m14a != "0" && m14b == "0" {
       errors.push(ScoreError {
         id: "m14a,m14b".to_string(),
@@ -653,5 +644,14 @@ impl AusFLLGame for Masterpiece {
     }
 
     return score;
+  }
+
+  fn get_game(&self) -> crate::schemas::Game {
+    return crate::schemas::Game {
+      name: "Masterpiece".to_string(),
+      program: "FLL_CHALLENGE".to_string(),
+      missions: self.get_missions(),
+      questions: self.get_questions(),
+    };
   }
 }

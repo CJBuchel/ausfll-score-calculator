@@ -18,7 +18,7 @@ pub fn generate_wasm(outdir: &OsString) {
   }
 
   let status_wasm_pack_build = Command::new("wasm-pack")
-    .args(&["build", "--target", "web", "--out-dir", "ausfll_wasm_pkg"])
+    .args(&["build", "--target", "nodejs", "--out-dir", "ausfll_wasm_pkg"])
     .current_dir(wasm_compiler_path)
     .status()
     .expect("Failed to compile crate C with wasm target.");
