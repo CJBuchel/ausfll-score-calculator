@@ -107,6 +107,10 @@ impl GameMap {
   pub fn iter(&self) -> impl Iterator<Item = (&String, &Box<dyn AusFLLGame>)> {
     self.0.iter()
   }
+
+  pub fn map(&self) -> &Map<String, Box<dyn AusFLLGame>> {
+    &self.0
+  }
 }
 
 impl Serialize for GameMap {

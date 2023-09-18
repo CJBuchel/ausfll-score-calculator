@@ -1,6 +1,7 @@
 use crate::schemas::MissionPicture;
 
-pub static MISSION_PICS_20232024: [MissionPicture; 16] = [
+pub static MISSION_PICS_20232024: [MissionPicture; 17] = [
+  MissionPicture { prefix: "m00",  url: "https://firebasestorage.googleapis.com/v0/b/firstaustralia-system.appspot.com/o/scoring%2Fsuperpowered%2Fsp_m00.png?alt=media&token=4254e65f-d66a-4998-b726-7f89df87906e" },
   MissionPicture { prefix: "m01",  url: "https://firebasestorage.googleapis.com/v0/b/firstaustralia-system.appspot.com/o/scoring%2Fmasterpiece%2Fm01.png?alt=media&token=7eeb7bcc-66c4-41ef-9179-580d1a1bd235" },
   MissionPicture { prefix: "m02",  url: "https://firebasestorage.googleapis.com/v0/b/firstaustralia-system.appspot.com/o/scoring%2Fmasterpiece%2Fm02.png?alt=media&token=a5a4cb5d-b15c-44ff-a39f-9eba82f01f54" },
   MissionPicture { prefix: "m03",  url: "https://firebasestorage.googleapis.com/v0/b/firstaustralia-system.appspot.com/o/scoring%2Fmasterpiece%2Fm03.png?alt=media&token=b740de59-8f3b-4603-a452-24128c318ae5" },
