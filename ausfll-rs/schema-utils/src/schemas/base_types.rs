@@ -60,6 +60,7 @@ pub struct MissionPicture { // this is kept as a static because nothing else use
 pub struct Game {
   pub name: String,
   pub program: String,
+  pub rule_book_url: String,
   pub missions: Vec<Mission>,
   pub questions: Vec<Score>,
 }

@@ -650,6 +650,7 @@ impl AusFLLGame for Masterpiece {
     return crate::schemas::Game {
       name: "Masterpiece".to_string(),
       program: "FLL_CHALLENGE".to_string(),
+      rule_book_url: "https://firstinspiresst01.blob.core.windows.net/first-in-show-masterpiece/fll-challenge/fll-challenge-masterpiece-rgr-en.pdf".to_string(),
       missions: self.get_missions(),
       questions: self.get_questions(),
     };
