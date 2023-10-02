@@ -599,6 +599,12 @@ impl AusFLLGame for Masterpiece {
       score += 10;
     }
 
+    // M13 - 10 points for a, 20 points for b
+    if self.s_answer(answers.clone(), "m13a") == "Yes" { score += 10; }
+    if self.s_answer(answers.clone(), "m13b") == "Yes" { score += 20; }
+
+
+
     // M14 - 5 each for a, 5 each for b
     match self.s_answer(answers.clone(), "m14a").as_str() {
       "1" => score += 5,
