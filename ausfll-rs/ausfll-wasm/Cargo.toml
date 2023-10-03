@@ -10,7 +10,7 @@ debug = true
 crate-type = ["cdylib"]
 
 [dependencies]
-schema-utils = { path = "../schema-utils" }
+fll-games = { path = "../fll-games" }
 paste = "1.0.14"
 serde = "1.0.188"
 serde_json = "1.0.105"

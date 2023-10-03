@@ -3,7 +3,7 @@ use std::ffi::OsString;
 use std::path::Path;
 use std::fs;
 
-use schema_utils::schemas::{Game, Games, ScoreAnswer, DefaultValue, QuestionInput, Score, ScoreError, Mission, MissionPicture};
+use fll_games::schemas::{Game, Games, ScoreAnswer, DefaultValue, QuestionInput, Score, ScoreError, Mission, MissionPicture};
 use schemars::JsonSchema;
 use serde::Serialize;
 

@@ -6,7 +6,8 @@
     "missions",
     "name",
     "program",
-    "questions"
+    "questions",
+    "rule_book_url"
   ],
   "properties": {
     "missions": {
@@ -26,6 +27,9 @@
       "items": {
         "$ref": "#/definitions/Score"
       }
+    },
+    "rule_book_url": {
+      "type": "string"
     }
   },
   "definitions": {

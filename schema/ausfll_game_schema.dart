@@ -13,12 +13,14 @@ class AusfllGameSchema {
     String name;
     String program;
     List<Score> questions;
+    String ruleBookUrl;
 
     AusfllGameSchema({
         required this.missions,
         required this.name,
         required this.program,
         required this.questions,
+        required this.ruleBookUrl,
     });
 
     factory AusfllGameSchema.fromJson(Map<String, dynamic> json) => AusfllGameSchema(
@@ -26,6 +28,7 @@ class AusfllGameSchema {
         name: json["name"],
         program: json["program"],
         questions: List<Score>.from(json["questions"].map((x) => Score.fromJson(x))),
+        ruleBookUrl: json["rule_book_url"],
     );
 
     Map<String, dynamic> toJson() => {
@@ -33,6 +36,7 @@ class AusfllGameSchema {
         "name": name,
         "program": program,
         "questions": List<dynamic>.from(questions.map((x) => x.toJson())),
+        "rule_book_url": ruleBookUrl,
     };
 }
 

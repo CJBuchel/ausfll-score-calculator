@@ -1,4 +1,4 @@
-use schema_utils::schemas::*;
+use fll_games::schemas::*;
 
 use wasm_bindgen::prelude::*;
 

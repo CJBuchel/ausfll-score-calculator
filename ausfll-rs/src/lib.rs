@@ -1,2 +1,2 @@
-pub use schema_utils::*;
-pub use schema_utils::schemas::*;
+pub use fll_games::*;
+pub use fll_games::schemas::*;

@@ -8,10 +8,11 @@
 // match the expected interface, even if the JSON is valid.
 
 export interface AusfllGameSchema {
-    missions:  Mission[];
-    name:      string;
-    program:   string;
-    questions: Score[];
+    missions:      Mission[];
+    name:          string;
+    program:       string;
+    questions:     Score[];
+    rule_book_url: string;
     [property: string]: any;
 }
 
@@ -222,6 +223,7 @@ const typeMap: any = {
         { json: "name", js: "name", typ: "" },
         { json: "program", js: "program", typ: "" },
         { json: "questions", js: "questions", typ: a(r("Score")) },
+        { json: "rule_book_url", js: "rule_book_url", typ: "" },
     ], "any"),
     "Mission": o([
         { json: "image", js: "image", typ: u(undefined, u(null, "")) },
